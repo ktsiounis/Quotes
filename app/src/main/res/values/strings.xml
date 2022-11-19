@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Quotes</string>
+    <string name="quotes_fragment_label">Quotes</string>
+    <string name="quote_details_fragment_label">Quote Details</string>
+    <string name="fab_add_quote">Add quote</string>
+    <string name="random_quote_title">Random Quote</string>
+    <string name="fab_random_quote">Random Quote</string>
+    <string name="delete_quote_button_text">Delete</string>
+    <string name="edit_quote_button_text">Edit</string>
+    <string name="new_quote_dialog_title">New Quote</string>
+    <string name="edit_quote_dialog_title">Edit Quote</string>
+    <string name="save_button_text">Save</string>
+    <string name="cancel_button_text">Cancel</string>
+</resources>
