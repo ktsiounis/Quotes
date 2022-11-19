@@ -2,8 +2,10 @@ package com.example.quotes.data.quotes
 
 import android.content.SharedPreferences
 import android.text.format.DateUtils
-import com.example.quotes.data.Result
-import com.example.quotes.data.utils.successOf
+import com.example.data.quotes.QuotesClient
+import com.example.data.quotes.QuotesRepository
+import com.example.domain.quotes.Quote
+import com.example.network.utils.successOf
 import com.example.quotes.runTestWithDispatcher
 import com.google.gson.Gson
 import io.kotest.matchers.shouldBe
@@ -57,7 +59,11 @@ internal class QuotesRepositoryTest {
         every { gsonMock.toJson(null) } returns ""
         mockkStatic(DateUtils::class)
         every { DateUtils.isToday(1234L) } answers { true }
-        coEvery { clientMock.getRandomQuote() } returns flowOf(successOf(quote))
+        coEvery { clientMock.getRandomQuote() } returns flowOf(
+            com.example.network.utils.successOf(
+                quote
+            )
+        )
         every { calendarMock.timeInMillis } returns 1234L
 
         val result = testedClass.getRandomQuote()

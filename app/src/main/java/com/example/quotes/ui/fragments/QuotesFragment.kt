@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quotes.R
-import com.example.quotes.data.quotes.Quote
+import com.example.domain.quotes.Quote
 import com.example.quotes.databinding.FragmentQuotesBinding
 import com.example.quotes.ui.adapters.QuotesAdapter
 import com.example.quotes.ui.viewmodels.MainViewModel

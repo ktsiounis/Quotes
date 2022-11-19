@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.quotes.R
-import com.example.quotes.data.quotes.Quote
+import com.example.domain.quotes.Quote
 import com.example.quotes.databinding.FragmentQuoteDetailsBinding
 import com.example.quotes.ui.viewmodels.MainViewModel
 import com.example.quotes.ui.viewmodels.QuotesUiAction

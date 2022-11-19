@@ -2,11 +2,11 @@ package com.example.quotes.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.quotes.data.quotes.Quote
-import com.example.quotes.domain.quotes.QuotesUseCase
+import com.example.domain.quotes.Quote
+import com.example.domain.quotes.QuotesUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import com.example.quotes.data.Result
+import com.example.common.Result
 
 class MainViewModel(
     private val quotesUseCase: QuotesUseCase

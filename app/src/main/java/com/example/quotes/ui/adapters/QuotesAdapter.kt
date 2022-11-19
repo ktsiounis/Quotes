@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quotes.R
-import com.example.quotes.data.quotes.Quote
+import com.example.domain.quotes.Quote
 
 class QuotesAdapter(private val quotes: ArrayList<Quote>, private val onCLick: (Quote) -> Unit) :
     RecyclerView.Adapter<QuotesAdapter.QuoteViewHolder>() {
