@@ -5,15 +5,16 @@ import android.text.format.DateUtils
 import com.example.data.quotes.QuotesClient
 import com.example.data.quotes.QuotesRepository
 import com.example.domain.quotes.Quote
-import com.example.network.utils.successOf
 import com.example.quotes.runTestWithDispatcher
 import com.google.gson.Gson
 import io.kotest.matchers.shouldBe
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
 import org.junit.jupiter.api.Test;
 import java.util.Calendar
+import com.example.common.Result
+import com.example.data.quotes.QuoteRaw
+import com.example.network.utils.successOf
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class QuotesRepositoryTest {
@@ -32,6 +33,7 @@ internal class QuotesRepositoryTest {
     )
 
     private val quote = Quote("", "John Lennon", "Life is what happens when you’re busy making other plans.")
+    private val quoteRaw = QuoteRaw("", "John Lennon", "Life is what happens when you’re busy making other plans.")
 
     @Test
     fun `when today's quote is stored, repository returns this one`() = runTestWithDispatcher {
@@ -59,11 +61,7 @@ internal class QuotesRepositoryTest {
         every { gsonMock.toJson(null) } returns ""
         mockkStatic(DateUtils::class)
         every { DateUtils.isToday(1234L) } answers { true }
-        coEvery { clientMock.getRandomQuote() } returns flowOf(
-            com.example.network.utils.successOf(
-                quote
-            )
-        )
+        coEvery { clientMock.getRandomQuote() } returns successOf(quoteRaw)
         every { calendarMock.timeInMillis } returns 1234L
 
         val result = testedClass.getRandomQuote()
