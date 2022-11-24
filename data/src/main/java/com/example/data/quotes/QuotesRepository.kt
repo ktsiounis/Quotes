@@ -38,20 +38,19 @@ class QuotesRepository(
         return if(quote != null && quoteDate != 0L && DateUtils.isToday(quoteDate)) {
             flowOf(Result.Success(quote))
         } else {
-            flowOf(client.getRandomQuote().toQuoteResult()).also {
-                it.collect { result ->
-                    when(result) {
-                        is Result.Success -> {
-                            sharedPreferences
-                                .edit()
-                                .putString(todaysQuoteKey, gson.toJson(quote))
-                                .putLong(todaysQuoteDateKey, calendarInstance.timeInMillis)
-                                .apply()
-                        }
-                        else -> {}
+            val result = client.getRandomQuote().also {
+                when(it) {
+                    is Result.Success -> {
+                        sharedPreferences
+                            .edit()
+                            .putString(todaysQuoteKey, gson.toJson(it.value))
+                            .putLong(todaysQuoteDateKey, calendarInstance.timeInMillis)
+                            .apply()
                     }
+                    else -> {}
                 }
             }
+            flowOf(result.toQuoteResult())
         }
     }
 

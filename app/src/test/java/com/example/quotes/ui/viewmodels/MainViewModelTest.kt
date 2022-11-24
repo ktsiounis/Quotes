@@ -1,8 +1,8 @@
 package com.example.quotes.ui.viewmodels
 
 import app.cash.turbine.test
+import com.example.common.Result
 import com.example.domain.quotes.Quote
-import com.example.network.utils.successOf
 import com.example.domain.quotes.QuotesUseCase
 import com.example.quotes.runTestWithDispatcher
 import io.kotest.matchers.shouldBe
@@ -25,11 +25,7 @@ internal class MainViewModelTest {
     @Test
     fun `when successfully refresh quote, state includes new quotes`() = runTestWithDispatcher {
         testedClass.uiState.test {
-            coEvery { quotesUseCaseMock.getQuotes() } returns flowOf(
-                com.example.network.utils.successOf(
-                    quotes
-                )
-            )
+            coEvery { quotesUseCaseMock.getQuotes() } returns flowOf(Result.Success(quotes))
 
             testedClass.refreshQuotes()
 
@@ -42,11 +38,7 @@ internal class MainViewModelTest {
     @Test
     fun `when random quote is retrieved successfully, action to show it is emitted`() = runTestWithDispatcher {
         testedClass.uiActions.test {
-            coEvery { quotesUseCaseMock.getRandomQuote() } returns flowOf(
-                com.example.network.utils.successOf(
-                    quote
-                )
-            )
+            coEvery { quotesUseCaseMock.getRandomQuote() } returns flowOf(Result.Success(quote))
 
             testedClass.getRandomQuote()
 
@@ -58,11 +50,7 @@ internal class MainViewModelTest {
     @Test
     fun `when quote is deleted successfully, action to close details is emitted`() = runTestWithDispatcher {
         testedClass.uiActions.test {
-            coEvery { quotesUseCaseMock.deleteQuote(any()) } returns flowOf(
-                com.example.network.utils.successOf(
-                    Unit
-                )
-            )
+            coEvery { quotesUseCaseMock.deleteQuote(any()) } returns flowOf(Result.Success(Unit))
 
             testedClass.deleteQuote("")
 
@@ -74,16 +62,8 @@ internal class MainViewModelTest {
     @Test
     fun `when new quote is successfully added, quotes list is refreshed`() = runTestWithDispatcher {
         testedClass.uiState.test {
-            coEvery { quotesUseCaseMock.createQuote(quote2) } returns flowOf(
-                com.example.network.utils.successOf(
-                    Unit
-                )
-            )
-            coEvery { quotesUseCaseMock.getQuotes() } returns flowOf(
-                com.example.network.utils.successOf(
-                    quotes
-                )
-            )
+            coEvery { quotesUseCaseMock.createQuote(quote2) } returns flowOf(Result.Success(Unit))
+            coEvery { quotesUseCaseMock.getQuotes() } returns flowOf(Result.Success(quotes))
 
             testedClass.addQuote(quote2)
 
@@ -96,11 +76,7 @@ internal class MainViewModelTest {
     @Test
     fun `when quote is updated successfully, action to close details is emitted`() = runTestWithDispatcher {
         testedClass.uiActions.test {
-            coEvery { quotesUseCaseMock.updateQuote(any(), any()) } returns flowOf(
-                com.example.network.utils.successOf(
-                    Unit
-                )
-            )
+            coEvery { quotesUseCaseMock.updateQuote(any(), any()) } returns flowOf(Result.Success(Unit))
 
             testedClass.updateQuote(quote)
 
