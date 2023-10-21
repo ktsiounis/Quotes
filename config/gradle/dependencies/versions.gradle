@@ -6,7 +6,7 @@ ext.versions = [
 
         //Testing
         junit4                  : '4.13.2',
-        junit5                  : '5.8.2',
+        junit5                  : '5.10.0',
         mockk                   : '1.13.2',
         coroutines              : '1.6.4',
         turbine                 : '0.12.1',
